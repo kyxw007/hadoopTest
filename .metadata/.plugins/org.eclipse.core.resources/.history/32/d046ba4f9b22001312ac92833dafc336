@@ -1,0 +1,50 @@
+package hadoop;
+
+public class uploadtest {
+	public static void main(String[] args) throws Exception {
+		//-------------test uploadLocalfile-----------
+        String src ="/home/grid/input/D3"; 
+        String dst = "hdfs://ubuntu:9000//user/grid/in01";
+        HDFS testFileOperate = new HDFS();
+        testFileOperate.uploadLocalfileToHdfs(src, dst);
+        
+       /* 
+        Upload to file:///
+------------list files------------
+
+        
+        //-----------test create HDFS file------------
+        FileInputStream file = new FileInputStream(src);
+        byte[] content = new byte[file.available()];
+        file.read(content);  //file the content arrays
+        
+        String newFileName = "/tmp/testFileOperate/newFile.txt";
+        testFileOperate.createNewHdfsHDFS testFileOperate = new HDFS();
+        testFileOperate.uploadLocalfileToHdfs(src, dst);File(newFileName, content);
+        
+        //-----------test rename HDFS file--------------
+        String rename = "/new2.cpp";
+        testFileOperate.renameHdfsFile(newFileName, rename);
+                
+        //----------test make a new dir in Hdfs-------
+        String dir = "/tmp/testFileOUpload to file:///
+------------list files------------
+perate/test";
+        testFileOperate.mkdir(dir);
+        
+        //-----------test delete Hdfs file------------
+        //testFileOperate.deleteHdfsFile("/tmp/testFileOperate/newFile.txt");
+        Upload to file:///
+------------list files------------
+
+        //-----------test read Hdfs file
+        byte[] readContent = testFileOperate.readHdfsFile(rename);
+        if (readContent != null)
+        {
+            String contentString = new String(readContent);    
+            System.out.println("OK,read content: \n"+contentString);
+        }*/
+        System.out.print("\n-------END----------\n");
+	}
+   
+}

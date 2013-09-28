@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.io.IOException"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.hbase.HBaseConfiguration"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.hbase.client.HBaseAdmin"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.hbase.HTableDescriptor"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.hbase.HColumnDescriptor"/>
+<fullyQualifiedTypeName name="org.apache.commons.configuration.Configuration"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.conf.Configuration"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.hbase.client.HTable"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.hbase.client.Put"/>
+<fullyQualifiedTypeName name="org.apache.hadoop.hbase.client.Result"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="java.util.Map.Entry"/>
+</qualifiedTypeNameHistroy>

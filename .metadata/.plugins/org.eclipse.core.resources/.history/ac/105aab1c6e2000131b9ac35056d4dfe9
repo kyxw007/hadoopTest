@@ -1,0 +1,47 @@
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileStatus;
+import org.apache.hadoop.fs.FileSystem;
+import org.apache.hadoop.fs.Path;
+
+public class uploadtest {
+	public static void main(String[] args) throws Exception {
+		//-------------test uploadLocalfile-----------
+        String src ="/home/hadoop/hadoop/input/text1.txt"; 
+        String dst = "/in";
+        
+        HDFS testFileOperate = new HDFS();
+        testFileOperate.uploadLocalfileToHdfs(src, dst);
+        
+        //-----------test create HDFS file------------
+        FileInputStream file = new FileInputStream(src);
+        byte[] content = new byte[file.available()];
+        file.read(content);  //file the content arrays
+        
+        String newFileName = "/tmp/testFileOperate/newFile.txt";
+        testFileOperate.createNewHdfsFile(newFileName, content);
+        
+        //-----------test rename HDFS file--------------
+        String rename = "/new2.cpp";
+        testFileOperate.renameHdfsFile(newFileName, rename);
+                
+        //----------test make a new dir in Hdfs-------
+        String dir = "/tmp/testFileOperate/test";
+        testFileOperate.mkdir(dir);
+        
+        //-----------test delete Hdfs file------------
+        //testFileOperate.deleteHdfsFile("/tmp/testFileOperate/newFile.txt");
+        
+        //-----------test read Hdfs file
+        byte[] readContent = testFileOperate.readHdfsFile(rename);
+        if (readContent != null)
+        {
+            String contentString = new String(readContent);    
+            System.out.println("OK,read content: \n"+contentString);
+        }
+    
+	}
+   
+}

@@ -1,0 +1,54 @@
+package hbase;
+
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.hbase.HBaseConfiguration;
+import org.apache.hadoop.hbase.HColumnDescriptor;
+import org.apache.hadoop.hbase.HTableDescriptor;
+import org.apache.hadoop.hbase.MasterNotRunningException;
+import org.apache.hadoop.hbase.ZooKeeperConnectionException;
+import org.apache.hadoop.hbase.client.HBaseAdmin;
+import org.apache.hadoop.hbase.client.HTable;
+
+/**
+ * @author grid
+ *
+ */
+public class HbaseAPI {
+
+	private static HBaseAdmin admin;
+	private static Configuration conf;
+	public static HTable table;
+
+	HbaseAPI() throws MasterNotRunningException, ZooKeeperConnectionException {
+		conf = HBaseConfiguration.create();
+		conf.set("hbase.zookeeper.quorumtableName", "ubuntu");
+		admin = new HBaseAdmin(conf);
+
+	}
+
+	/**
+	 * @param tableName 
+	 * @param columnFarily
+	 * @throws Exception
+	 */
+	public static void createTable(String tableName, String columnFarily)
+			throws Exception {
+
+		if (admin.tableExists(tableName)) {
+			System.out.println(tableName + " 存在！");
+			System.exit(0);
+		} else {
+			HTableDescriptor tableDesc = new HTableDescriptor(tableName);
+			tableDesc.addFamily(new HColumnDescriptor(columnFarily + ":"));
+			admin.createTable(tableDesc);
+			table = new HTable(conf,tableName);
+			System.out.println("创建表成功！");
+		}
+	}
+
+	public static void addData(String tableName, String row,
+			String columnFamily, String column, String data) throws Exception {
+
+	}
+
+}

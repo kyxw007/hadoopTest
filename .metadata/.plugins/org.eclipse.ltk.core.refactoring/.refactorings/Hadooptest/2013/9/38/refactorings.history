@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 4 elements to &apos;HadoopTest/src/hadoop&apos;&#x0A;- Original project: &apos;Hadooptest&apos;&#x0A;- Destination element: &apos;HadoopTest/src/hadoop&apos;&#x0A;- Original elements:&#x0A;     uploadtest.java&#x0A;     HDFS.java&#x0A;     WordCount.java&#x0A;     LazyMapReduce.java" description="Copy compilation units" destination="=HadoopTest/src&lt;hadoop" element1="/src&lt;{uploadtest.java" element2="/src&lt;{HDFS.java" element3="/src&lt;{WordCount.java" element4="/src&lt;{LazyMapReduce.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1379672249830" units="4" version="1.0"/>
+</session>

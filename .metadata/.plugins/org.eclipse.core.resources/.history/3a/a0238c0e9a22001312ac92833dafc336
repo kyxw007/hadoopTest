@@ -1,0 +1,142 @@
+package hadoop;
+
+import java.io.IOException;
+
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FSDataInputStream;
+import org.apache.hadoop.fs.FSDataOutputStream;
+import org.apache.hadoop.fs.FileStatus;
+import org.apache.hadoop.fs.FileSystem;
+import org.apache.hadoop.fs.Path;
+
+public class HDFS {
+	public void uploadLocalfileToHdfs(String src, String dst)
+			throws IOException {
+
+		Configuration conf = new Configuration();
+		conf.addResource("hdfs-site.xml");
+		FileSystem hdfs = FileSystem.get(conf);
+
+		Path srcPath = new Path(src);
+		Path dstPath = new Path(dst);
+
+		hdfs.copyFromLocalFile(true, true, srcPath, dstPath);
+
+		// print
+		System.out.println("Upload to " + conf.get("fs.default.name"));
+
+		System.out.println("------------list files------------" + "\n");
+		FileStatus[] fileStatus = hdfs.listStatus(dstPath);
+		for (FileStatus file : fileStatus) {
+			System.out.println(file.getPath());
+		}
+
+		hdfs.close();
+	}
+
+	public void createNewHdfsFile(String dst, byte[] content)
+			throws IOException {
+		Configuration conf = new Configuration();
+		FileSystem hdfs = FileSystem.get(conf);
+
+		Path dstPath = new Path(dst);
+		FSDataOutputStream outputStream = hdfs.create(dstPath);
+
+		outputStream.write(content);
+
+		outputStream.close();
+		hdfs.close();
+
+		System.out.println("success, create a new file in HDFS:  " + dst);
+
+	}
+
+	/*
+	 * rename a file in HDFS
+	 */
+	public void renameHdfsFile(String src, String newName) throws IOException {
+		Configuration conf = new Configuration();
+		FileSystem hdfs = FileSystem.get(conf);
+
+		Path srcPath = new Path(src);
+		Path dstPath = new Path(newName);
+
+		if (hdfs.rename(srcPath, dstPath)) {
+			System.out.println("ok, file: " + src + " renamed to: " + newName);
+		} else {
+			System.out.println("error, file: " + src + "  rename failed!");
+		}
+
+		hdfs.close();
+	}
+
+	/*
+	 * delete a hdfs file
+	 */
+	public void deleteHdfsFile(String src) throws IOException {
+		Configuration conf = new Configuration();
+		FileSystem hdfs = FileSystem.get(conf);
+
+		Path srcPath = new Path(src);
+
+		if (hdfs.delete(srcPath, false)) {
+			System.out.println("ok, delete file: " + srcPath);
+		} else {
+			System.out.println("error,delete file: " + srcPath + " failed!");
+		}
+
+		hdfs.close();
+	}
+
+	/*
+	 * make a new dir in the Hdfs
+	 */
+	public void mkdir(String dir) throws IOException {
+		Configuration conf = new Configuration();
+		FileSystem hdfs = FileSystem.get(conf);
+
+		Path dirPath = new Path(dir);
+
+		if (hdfs.mkdirs(dirPath)) {
+			System.out.println("ok, make dir: " + dir);
+		} else {
+			System.out.println("error, make dir: " + dir + " failed!");
+		}
+		;
+
+		hdfs.close();
+	}
+
+	/*
+	 * read the hdfs file content
+	 */
+	public byte[] readHdfsFile(String src) throws IOException {
+		byte[] buffer = null;
+
+		Configuration conf = new Configuration();
+		FileSystem hdfs = FileSystem.get(conf);
+
+		Path srcPath = new Path(src);
+
+		if (hdfs.exists(srcPath)) {
+			FSDataInputStream input = hdfs.open(srcPath);
+
+			FileStatus state = hdfs.getFileStatus(srcPath);
+
+			// long--->string--->int
+			int length = Integer.parseInt(String.valueOf(state.getLen()));
+			buffer = new byte[length];
+
+			input.readFully(buffer);
+
+			input.close();
+
+		} else {
+			System.out.println("error, file is not existed! Read failed!");
+		}
+
+		hdfs.close();
+		return buffer;
+	}
+
+}

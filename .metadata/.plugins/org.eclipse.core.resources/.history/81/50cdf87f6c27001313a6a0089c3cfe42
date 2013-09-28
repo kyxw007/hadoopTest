@@ -1,0 +1,16 @@
+package hbase;
+
+import org.apache.hadoop.hbase.MasterNotRunningException;
+import org.apache.hadoop.hbase.ZooKeeperConnectionException;
+
+public class HbaseAction {
+	public static void main(String[] args) throws Exception{
+		/*HbaseAPI HB = new HbaseAPI();
+		HB.cargsreateTable("tab1", "fam1");
+		HB.addData("tab1", "row1", "fam1", "col1", "val1");
+		HB.addData("tab1", "row2", "fam1", "col2", "val2");
+		HB.addData("tab1", "row2", "fam1", "col3", "val3");
+		HB.Scanner("tab1", "fam1");*/
+	}
+
+}

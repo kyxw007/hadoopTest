@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy package &apos;hadoop&apos; to &apos;hadoopTest/src&apos;&#x0A;- Original project: &apos;HadoopTest&apos;&#x0A;- Destination element: &apos;hadoopTest/src&apos;&#x0A;- Original element: &apos;HadoopTest/src/hadoop&apos;" description="Copy package" destination="=hadoopTest/src" element1="/src&lt;hadoop" flags="589830" fragments="1" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyPackages" stamp="1379924972023" version="1.0"/>
+</session>

@@ -1,0 +1,8 @@
+package hbase;
+
+public class HbaseAction {
+	public static main(){
+		
+	}
+
+}

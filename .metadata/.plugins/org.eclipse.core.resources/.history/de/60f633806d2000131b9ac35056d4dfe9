@@ -1,0 +1,50 @@
+import java.io.IOException;
+
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FSDataOutputStream;
+import org.apache.hadoop.fs.FileStatus;
+import org.apache.hadoop.fs.FileSystem;
+import org.apache.hadoop.fs.Path;
+
+public class HDFS {
+	public void uploadLocalfileToHdfs(String src, String dst)
+			throws IOException {
+
+		Configuration conf = new Configuration();
+		FileSystem hdfs = FileSystem.get(conf);
+
+		Path srcPath = new Path(src);
+		Path dstPath = new Path(dst);
+
+		hdfs.copyFromLocalFile(srcPath, dstPath);
+
+		// print
+		System.out.println("Upload to " + conf.get("fs.default.name"));
+
+		System.out.println("------------list files------------" + "\n");
+		FileStatus[] fileStatus = hdfs.listStatus(dstPath);
+		for (FileStatus file : fileStatus) {
+			System.out.println(file.getPath());
+		}
+
+		hdfs.close();
+	}
+
+	public void createNewHdfsFile(String dst, byte[] content)
+			throws IOException {
+		Configuration conf = new Configuration();
+		FileSystem hdfs = FileSystem.get(conf);
+
+		Path dstPath = new Path(dst);
+		FSDataOutputStream outputStream = hdfs.create(dstPath);
+
+		outputStream.write(content);
+
+		outputStream.close();
+		hdfs.close();
+
+		System.out.println("success, create a new file in HDFS:  " + dst);
+
+	}
+
+}
